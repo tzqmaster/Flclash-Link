@@ -1,38 +1,48 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
 //  生成日期: 2026-10-19
-//  作用: 剔除伪节点 → 重建 22 个策略组 → 覆盖 771 条规则 → Apple 直连
+//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 771 条规则 -> Apple 直连
 //
-//  用法一（推荐，永久生效）: FlClash → 配置 → 选中订阅 → 右上角「脚本」
-//                         → 粘贴本文件全文 → 保存 → 重新拉取订阅
-//  用法二: 放进仓库，用 raw 链接填到脚本的 URL 栏
+//  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
+//                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
+//  用法二: 填 raw 链接，设备拉订阅时自动获取最新版
+//          https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/main.js
 //
 //  设计要点:
-//   1. 区域组用正则从实际节点里挑（换节点/改名都不会失效）
+//   1. 区域组用正则从实际节点里挑，换节点 / 改名都不会失效
 //   2. 规则整段覆盖，不依赖机场订阅自带的规则
 //   3. 兜底 = 走代理；国内由 GEOSITE,cn / .cn / GEOIP,cn 三层拦回直连
+//   4. 全文 ES5 写法（var / function / 无箭头函数），兼容各版本脚本引擎
 // =====================================================================
 
 function main(config) {
-  // ---------- 1. 剔除伪节点（"剩余流量""套餐到期"这类，会被测速误选）----------
-  const FAKE = /剩余流量|套餐到期|官网|过期|重置/;
-  const proxies = (config.proxies || []).filter(p => p && p.name && !FAKE.test(p.name));
+  // ---------- 1. 剔除伪节点（"剩余流量""套餐到期"这类会被测速误选）----------
+  var FAKE = /剩余流量|套餐到期|官网|过期|重置/;
+  var proxies = (config.proxies || []).filter(function (p) {
+    return p && p.name && !FAKE.test(p.name);
+  });
   config.proxies = proxies;
-  const names = proxies.map(p => p.name);
-  const pick = re => names.filter(n => re.test(n));
+
+  var names = [];
+  for (var i = 0; i < proxies.length; i++) names.push(proxies[i].name);
+
+  function pick(re) {
+    return names.filter(function (n) { return re.test(n); });
+  }
 
   // ---------- 2. 重建策略组 ----------
-  const groups = [];
+  var groups = [];
   function grp(name, type, members, extra) {
-    const g = { name, type, proxies: members };
-    if (extra) Object.assign(g, extra);
-    // 空组会让内核报错，兜底挂第一个节点或 DIRECT
+    var g = { name: name, type: type, proxies: members };
+    if (extra) {
+      for (var k in extra) { if (extra.hasOwnProperty(k)) g[k] = extra[k]; }
+    }
     if (!g.proxies.length) g.proxies = names.length ? [names[0]] : ['DIRECT'];
     groups.push(g);
   }
 
-  grp("♻️ 自动选择", 'url-test', names, {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🛡️ 故障转移", 'fallback', names, {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3});
+  grp("♻️ 自动选择", 'url-test', names.slice(), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🛡️ 故障转移", 'fallback', names.slice(), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3});
   grp("🇭🇰 香港优选", 'url-test', pick(/🇭🇰/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
   grp("🇯🇵 日本优选", 'url-test', pick(/🇯🇵/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
   grp("🇯🇵 日本稳定", 'fallback', pick(/🇯🇵/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3});
@@ -61,17 +71,20 @@ function main(config) {
 
   // ---------- 4. Apple 直连补丁（DNS 侧）----------
   if (config.dns) {
-    const apple = ['*.apple.com', '*.icloud.com', '*.mzstatic.com', '*.aaplimg.com',
-                   '*.cdn-apple.com', '*.icloud-content.com', '*.itunes.com', '*.me.com'];
-    config.dns['fake-ip-filter'] = Array.from(new Set(
-      (config.dns['fake-ip-filter'] || []).concat(apple)));
+    var apple = ['*.apple.com', '*.icloud.com', '*.mzstatic.com', '*.aaplimg.com',
+                 '*.cdn-apple.com', '*.icloud-content.com', '*.itunes.com', '*.me.com'];
+    var cur = config.dns['fake-ip-filter'] || [];
+    for (var j = 0; j < apple.length; j++) {
+      if (cur.indexOf(apple[j]) < 0) cur.push(apple[j]);
+    }
+    config.dns['fake-ip-filter'] = cur;
   }
 
   return config;
 }
 
 // ---------- 规则表（771 条）----------
-const RULES = [
+var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
   "DOMAIN-SUFFIX,lan,DIRECT",
