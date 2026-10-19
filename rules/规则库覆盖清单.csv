@@ -1,0 +1,84 @@
+﻿类型,名称,条数,目标组,说明
+geosite 大类,category-ai-chat-!cn,70,🤖 AI,AI 对话站（ChatGPT/Claude/Gemini/Perplexity 等）
+geosite 大类,category-dev,515,🐙 开发,开发者站（代码托管/包管理/文档）
+geosite 大类,category-games,836,🚀 节点选择,游戏平台与社区
+geosite 大类,category-media,1401,📺 流媒体,流媒体与音视频
+geosite 大类,category-entertainment,1501,📺 流媒体,娱乐内容站
+geosite 大类,category-social-media-!cn,578,🚀 节点选择,海外社交媒体
+geosite 大类,category-scholar-!cn,5992,🚀 节点选择,学术/科研/文献
+geosite 单站,reddit,1,🚀 节点选择,Reddit
+geosite 单站,discord,1,🚀 节点选择,Discord
+geosite 单站,wikimedia,1,🚀 节点选择,维基媒体
+geosite 单站,linkedin,1,🚀 节点选择,领英
+geosite 单站,pinterest,1,🚀 节点选择,Pinterest
+geosite 单站,tumblr,1,🚀 节点选择,Tumblr
+geosite 单站,quora,1,🚀 节点选择,Quora
+geosite 单站,medium,1,🚀 节点选择,Medium
+geosite 单站,signal,1,🚀 节点选择,Signal
+geosite 单站,line,1,🚀 节点选择,LINE
+geosite 单站,vk,1,🚀 节点选择,VK / OK.ru
+geosite 单站,hulu,1,📺 流媒体,Hulu
+geosite 单站,soundcloud,1,📺 流媒体,SoundCloud
+geosite 单站,tidal,1,📺 流媒体,TIDAL
+geosite 单站,vimeo,1,📺 流媒体,Vimeo
+geosite 单站,dailymotion,1,📺 流媒体,Dailymotion
+geosite 单站,gitlab,1,🐙 开发,GitLab
+geosite 单站,stackexchange,1,🐙 开发,Stack Exchange 全站
+geosite 单站,docker,1,🐙 开发,Docker Hub
+geosite 单站,npmjs,1,🐙 开发,npm
+geosite 单站,jetbrains,1,🐙 开发,JetBrains
+geosite 单站,unity,1,🐙 开发,Unity
+geosite 单站,huggingface,1,🤖 AI,Hugging Face
+geosite 单站,perplexity,1,🤖 AI,Perplexity
+geosite 单站,steam,1,🚀 节点选择,Steam
+geosite 单站,epicgames,1,🚀 节点选择,Epic Games
+geosite 单站,nintendo,1,🚀 节点选择,任天堂
+geosite 单站,playstation,1,🚀 节点选择,PlayStation
+geosite 单站,xbox,1,🚀 节点选择,Xbox
+geosite 单站,blizzard,1,🚀 节点选择,暴雪
+geosite 单站,riot,1,🚀 节点选择,Riot
+geosite 单站,notion,1,🚀 节点选择,Notion
+geosite 单站,figma,1,🚀 节点选择,Figma
+geosite 单站,slack,1,🚀 节点选择,Slack
+geosite 单站,zoom,1,🚀 节点选择,Zoom
+geosite 单站,trello,1,🚀 节点选择,Trello
+geosite 单站,atlassian,1,🚀 节点选择,Atlassian
+geosite 单站,adobe,1,🚀 节点选择,Adobe
+geosite 单站,dropbox,1,🚀 节点选择,Dropbox
+geosite 单站,onedrive,1,🚀 节点选择,OneDrive
+geosite 单站,mega,1,🚀 节点选择,MEGA
+geosite 单站,paypal,1,🚀 节点选择,PayPal
+geosite 单站,stripe,1,🚀 节点选择,Stripe
+geosite 单站,shopify,1,🚀 节点选择,Shopify
+geosite 单站,ebay,1,🚀 节点选择,eBay
+geosite 单站,amazon,1,🚀 节点选择,Amazon
+geosite 单站,bbc,1,🚀 节点选择,BBC
+geosite 单站,cnn,1,🚀 节点选择,CNN
+geosite 单站,nytimes,1,🚀 节点选择,纽约时报
+geosite 单站,wsj,1,🚀 节点选择,华尔街日报
+geosite 单站,reuters,1,🚀 节点选择,路透社
+geosite 单站,bloomberg,1,🚀 节点选择,彭博
+geosite 单站,theguardian,1,🚀 节点选择,卫报
+geosite 单站,forbes,1,🚀 节点选择,福布斯
+geosite 单站,imdb,1,🚀 节点选择,IMDb
+geosite 单站,archive,1,🚀 节点选择,Archive.org
+geosite 单站,speedtest,1,🚀 节点选择,Speedtest
+geosite 单站,cloudflare,1,🚀 节点选择,Cloudflare
+geosite 单站,protonmail,1,🚀 节点选择,Proton Mail
+geosite 单站,duckduckgo,1,🚀 节点选择,DuckDuckGo
+geosite 单站,bing,1,🚀 节点选择,Bing
+geosite 单站,yandex,1,🚀 节点选择,Yandex
+域名后缀,维基 / 百科,17,🚀 节点选择,wikipedia.org、wikipedia.com、wikimediafoundation.org …
+域名后缀,社区 / 论坛,45,🚀 节点选择,reddit.com、redd.it、redditmedia.com …
+域名后缀,新闻 / 科技媒体,59,🚀 节点选择,apnews.com、npr.org、pbs.org …
+域名后缀,视频 / 音乐,40,📺 流媒体,googlevideo.com、ytimg.com、youtu.be …
+域名后缀,游戏,43,🚀 节点选择,steamcommunity.com、steampowered.com、steamstatic.com …
+域名后缀,开发 / 包管理,104,🐙 开发,github.io、githubusercontent.com、githubassets.com …
+域名后缀,AI 工具,31,🤖 AI,chatgpt.com、chat.openai.com、sora.com …
+域名后缀,办公 / 协作,41,🚀 节点选择,notion.so、notion.site、figma.com …
+域名后缀,云盘 / 邮箱,23,🚀 节点选择,dropbox.com、dropboxusercontent.com、box.com …
+域名后缀,购物 / 支付 / 金融,47,🚀 节点选择,paypal.com、stripe.com、wise.com …
+域名后缀,出行 / 旅行,31,🚀 节点选择,booking.com、agoda.com、expedia.com …
+域名后缀,学术 / 教育,45,🚀 节点选择,arxiv.org、biorxiv.org、medrxiv.org …
+域名后缀,影视资料 / 动漫 / 阅读,17,🚀 节点选择,imdb.com、rottentomatoes.com、letterboxd.com …
+域名后缀,网络 / 测速 / 工具,19,🚀 节点选择,speedtest.net、fast.com、dslreports.com …
