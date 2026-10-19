@@ -1,7 +1,7 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
 //  生成日期: 2026-10-19
-//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 801 条规则 -> Apple 直连
+//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 807 条规则 -> Apple 直连
 //
 //  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
 //                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
@@ -83,7 +83,7 @@ function main(config) {
   return config;
 }
 
-// ---------- 规则表（801 条）----------
+// ---------- 规则表（807 条）----------
 var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
@@ -249,6 +249,15 @@ var RULES = [
   "DOMAIN-SUFFIX,1drv.com,DIRECT",
   "DOMAIN-SUFFIX,onedrive.live.com,DIRECT",
   "DOMAIN-SUFFIX,skyapi.onedrive.live.com,DIRECT",
+  "DOMAIN-SUFFIX,microsoftpersonalcontent.com,DIRECT",
+  "DOMAIN-SUFFIX,attachments.office.net,DIRECT",
+  "DOMAIN-SUFFIX,res.cdn.office.net,DIRECT",
+  "DOMAIN-SUFFIX,statics.teams.cdn.office.net,DIRECT",
+  "DOMAIN-SUFFIX,onenote.com,DIRECT",
+  "DOMAIN-SUFFIX,microsoftstream.com,DIRECT",
+  "DOMAIN-SUFFIX,login.windows.net,DIRECT",
+  "DOMAIN-SUFFIX,aadcdn.msauth.net,DIRECT",
+  "DOMAIN-SUFFIX,aadcdn.msftauth.net,DIRECT",
   "DOMAIN-SUFFIX,intel.com,DIRECT",
   "DOMAIN-SUFFIX,amd.com,DIRECT",
   "DOMAIN-SUFFIX,nvidia.com,DIRECT",
@@ -425,7 +434,6 @@ var RULES = [
   "DOMAIN-SUFFIX,seekingalpha.com,🚀 节点选择",
   "DOMAIN-SUFFIX,yahoo.com,🚀 节点选择",
   "DOMAIN-SUFFIX,aol.com,🚀 节点选择",
-  "DOMAIN-SUFFIX,msn.com,🚀 节点选择",
   "DOMAIN-SUFFIX,nbcnews.com,🚀 节点选择",
   "DOMAIN-SUFFIX,abcnews.go.com,🚀 节点选择",
   "DOMAIN-SUFFIX,cbsnews.com,🚀 节点选择",
@@ -501,7 +509,6 @@ var RULES = [
   "DOMAIN-SUFFIX,nintendo.net,🚀 节点选择",
   "DOMAIN-SUFFIX,playstation.com,🚀 节点选择",
   "DOMAIN-SUFFIX,playstation.net,🚀 节点选择",
-  "DOMAIN-SUFFIX,xbox.com,🚀 节点选择",
   "DOMAIN-SUFFIX,xboxlive.com,🚀 节点选择",
   "DOMAIN-SUFFIX,minecraft.net,🚀 节点选择",
   "DOMAIN-SUFFIX,mojang.com,🚀 节点选择",
@@ -706,7 +713,6 @@ var RULES = [
   "DOMAIN-SUFFIX,box.com,🚀 节点选择",
   "DOMAIN-SUFFIX,boxcloud.com,🚀 节点选择",
   "DOMAIN-SUFFIX,mega.nz,🚀 节点选择",
-  "DOMAIN-SUFFIX,1drv.ms,🚀 节点选择",
   "DOMAIN-SUFFIX,pcloud.com,🚀 节点选择",
   "DOMAIN-SUFFIX,icedrive.net,🚀 节点选择",
   "DOMAIN-SUFFIX,sync.com,🚀 节点选择",
