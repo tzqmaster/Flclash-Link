@@ -1,7 +1,7 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
 //  生成日期: 2026-10-19
-//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 771 条规则 -> Apple 直连
+//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 801 条规则 -> Apple 直连
 //
 //  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
 //                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
@@ -83,7 +83,7 @@ function main(config) {
   return config;
 }
 
-// ---------- 规则表（771 条）----------
+// ---------- 规则表（801 条）----------
 var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
@@ -222,6 +222,38 @@ var RULES = [
   "GEOSITE,cn,DIRECT",
   "DOMAIN-SUFFIX,cn,DIRECT",
   "GEOIP,cn,DIRECT,no-resolve",
+  "DOMAIN,copilot.microsoft.com,🤖 AI",
+  "DOMAIN-SUFFIX,microsoft.com,DIRECT",
+  "DOMAIN-SUFFIX,microsoft365.com,DIRECT",
+  "DOMAIN-SUFFIX,office.com,DIRECT",
+  "DOMAIN-SUFFIX,officeapps.live.com,DIRECT",
+  "DOMAIN-SUFFIX,login.microsoftonline.com,DIRECT",
+  "DOMAIN-SUFFIX,login.live.com,DIRECT",
+  "DOMAIN-SUFFIX,account.live.com,DIRECT",
+  "DOMAIN-SUFFIX,live.com,DIRECT",
+  "DOMAIN-SUFFIX,msn.com,DIRECT",
+  "DOMAIN-SUFFIX,bing.com,DIRECT",
+  "DOMAIN-SUFFIX,outlook.com,DIRECT",
+  "DOMAIN-SUFFIX,outlook.office365.com,DIRECT",
+  "DOMAIN-SUFFIX,microsoftstore.com,DIRECT",
+  "DOMAIN-SUFFIX,windows.com,DIRECT",
+  "DOMAIN-SUFFIX,teams.microsoft.com,DIRECT",
+  "DOMAIN-SUFFIX,teams.live.com,DIRECT",
+  "DOMAIN-SUFFIX,xbox.com,DIRECT",
+  "DOMAIN-SUFFIX,azure.com,DIRECT",
+  "DOMAIN-SUFFIX,sharepoint.com,DIRECT",
+  "DOMAIN-SUFFIX,onedrive.com,DIRECT",
+  "DOMAIN-SUFFIX,api.onedrive.com,DIRECT",
+  "DOMAIN-SUFFIX,storage.live.com,DIRECT",
+  "DOMAIN-SUFFIX,1drv.ms,DIRECT",
+  "DOMAIN-SUFFIX,1drv.com,DIRECT",
+  "DOMAIN-SUFFIX,onedrive.live.com,DIRECT",
+  "DOMAIN-SUFFIX,skyapi.onedrive.live.com,DIRECT",
+  "DOMAIN-SUFFIX,intel.com,DIRECT",
+  "DOMAIN-SUFFIX,amd.com,DIRECT",
+  "DOMAIN-SUFFIX,nvidia.com,DIRECT",
+  "DOMAIN-SUFFIX,speedtest.net,DIRECT",
+  "DOMAIN-SUFFIX,files.pythonhosted.org,DIRECT",
   "GEOSITE,category-ai-chat-!cn,🤖 AI",
   "GEOSITE,category-dev,🐙 开发",
   "GEOSITE,category-games,🚀 节点选择",
@@ -268,7 +300,6 @@ var RULES = [
   "GEOSITE,atlassian,🚀 节点选择",
   "GEOSITE,adobe,🚀 节点选择",
   "GEOSITE,dropbox,🚀 节点选择",
-  "GEOSITE,onedrive,🚀 节点选择",
   "GEOSITE,mega,🚀 节点选择",
   "GEOSITE,paypal,🚀 节点选择",
   "GEOSITE,stripe,🚀 节点选择",
@@ -289,7 +320,6 @@ var RULES = [
   "GEOSITE,cloudflare,🚀 节点选择",
   "GEOSITE,protonmail,🚀 节点选择",
   "GEOSITE,duckduckgo,🚀 节点选择",
-  "GEOSITE,bing,🚀 节点选择",
   "GEOSITE,yandex,🚀 节点选择",
   "DOMAIN-SUFFIX,wikipedia.org,🚀 节点选择",
   "DOMAIN-SUFFIX,wikipedia.com,🚀 节点选择",

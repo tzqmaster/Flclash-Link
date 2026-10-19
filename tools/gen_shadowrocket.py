@@ -124,6 +124,8 @@ def main():
         if in_rules and re.match(r'^[a-zA-Z]', L):
             break
         if in_rules:
+            if L.lstrip().startswith('#'):
+                continue  # 注释掉的规则不算
             m = re.search(r"- '(.*?)'", L)
             if m:
                 clash_rules.append(m.group(1).strip())
