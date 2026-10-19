@@ -1,7 +1,7 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
-//  生成日期: 2026-10-19
-//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 807 条规则 -> Apple 直连
+//  生成日期: 2026-10-20
+//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 833 条规则 -> Apple 直连
 //
 //  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
 //                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
@@ -83,7 +83,7 @@ function main(config) {
   return config;
 }
 
-// ---------- 规则表（807 条）----------
+// ---------- 规则表（833 条）----------
 var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
@@ -222,6 +222,32 @@ var RULES = [
   "GEOSITE,cn,DIRECT",
   "DOMAIN-SUFFIX,cn,DIRECT",
   "GEOIP,cn,DIRECT,no-resolve",
+  "DOMAIN-SUFFIX,douyin.com,DIRECT",
+  "DOMAIN-SUFFIX,douyinstatic.com,DIRECT",
+  "DOMAIN-SUFFIX,douyinpic.com,DIRECT",
+  "DOMAIN-SUFFIX,douyincdn.com,DIRECT",
+  "DOMAIN-SUFFIX,douyinpiccdn.com,DIRECT",
+  "DOMAIN-SUFFIX,iesdouyin.com,DIRECT",
+  "DOMAIN-SUFFIX,amemv.com,DIRECT",
+  "DOMAIN-SUFFIX,zjcdn.com,DIRECT",
+  "DOMAIN-SUFFIX,snssdk.com,DIRECT",
+  "DOMAIN-SUFFIX,isnssdk.com,DIRECT",
+  "DOMAIN-SUFFIX,pstatp.com,DIRECT",
+  "DOMAIN-SUFFIX,toutiao.com,DIRECT",
+  "DOMAIN-SUFFIX,toutiaocdn.com,DIRECT",
+  "DOMAIN-SUFFIX,toutiaoimg.com,DIRECT",
+  "DOMAIN-SUFFIX,ixigua.com,DIRECT",
+  "DOMAIN-SUFFIX,ixiguavideo.com,DIRECT",
+  "DOMAIN-SUFFIX,byteimg.com,DIRECT",
+  "DOMAIN-SUFFIX,ibyteimg.com,DIRECT",
+  "DOMAIN-SUFFIX,bytecdn.cn,DIRECT",
+  "DOMAIN-SUFFIX,bytedance.com,DIRECT",
+  "DOMAIN-SUFFIX,bdurl.net,DIRECT",
+  "DOMAIN-SUFFIX,bytedapm.com,DIRECT",
+  "DOMAIN-SUFFIX,zijieapi.com,DIRECT",
+  "DOMAIN-SUFFIX,feishu.cn,DIRECT",
+  "DOMAIN-SUFFIX,feishucdn.com,DIRECT",
+  "DOMAIN-SUFFIX,larkoffice.com,DIRECT",
   "DOMAIN,copilot.microsoft.com,🤖 AI",
   "DOMAIN-SUFFIX,microsoft.com,DIRECT",
   "DOMAIN-SUFFIX,microsoft365.com,DIRECT",
