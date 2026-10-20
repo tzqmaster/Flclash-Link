@@ -17,7 +17,7 @@ d = yaml.safe_load(open(SRC, encoding='utf-8'))
 rules = d['rules']
 groups = d['proxy-groups']
 
-TEST = {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": False,
+TEST = {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": False,
         "timeout": 8000, "expected-status": 204, "max-failed-times": 3}
 URLTEST = dict(TEST, tolerance=50)
 
@@ -25,7 +25,6 @@ URLTEST = dict(TEST, tolerance=50)
 REGION = {
     '🇭🇰 香港优选':  ('url-test', r'🇭🇰', URLTEST),
     '🇯🇵 日本优选':  ('url-test', r'🇯🇵', URLTEST),
-    '🇯🇵 日本稳定':  ('fallback', r'🇯🇵', TEST),
     '🇸🇬 新加坡优选': ('url-test', r'🇸🇬', URLTEST),
     '🇺🇸 美国优选':  ('url-test', r'🇺🇸', URLTEST),
     '🇬🇧 英国优选':  ('url-test', r'🇬🇧', URLTEST),
@@ -54,7 +53,13 @@ for g in groups:
     elif name == FB_GROUP:
         lines.append("  grp(%s, 'fallback', names.slice(), %s);" % (js(name), js(TEST)))
     else:
-        extra = {"include-all-proxies": True} if g.get('include-all-proxies') else None
+        extra = {}
+        if g.get('include-all-proxies'):
+            extra["include-all-proxies"] = True
+        for k in ('url', 'interval', 'lazy', 'timeout', 'expected-status',
+                  'max-failed-times', 'tolerance'):
+            if k in g:
+                extra[k] = g[k]
         lines.append("  grp(%s, %s, %s%s);" % (
             js(name), js(g['type']), js(g.get('proxies', [])),
             (", " + js(extra)) if extra else ""))

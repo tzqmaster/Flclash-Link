@@ -41,28 +41,28 @@ function main(config) {
     groups.push(g);
   }
 
-  grp("♻️ 自动选择", 'url-test', names.slice(), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🛡️ 故障转移", 'fallback', names.slice(), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3});
-  grp("🇭🇰 香港优选", 'url-test', pick(/🇭🇰/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🇯🇵 日本优选", 'url-test', pick(/🇯🇵/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🇯🇵 日本稳定", 'fallback', pick(/🇯🇵/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3});
-  grp("🇸🇬 新加坡优选", 'url-test', pick(/🇸🇬/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🇺🇸 美国优选", 'url-test', pick(/🇺🇸/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🇬🇧 英国优选", 'url-test', pick(/🇬🇧/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🇯🇵 日本专线", 'url-test', pick(/🇯🇵.*专线/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🇸🇬 新加坡专线", 'url-test', pick(/🇸🇬.*专线/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🇺🇸 美国流媒体", 'url-test', pick(/🇺🇸.*流媒体/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
-  grp("🇨🇳 台湾专线", 'url-test', pick(/台湾.*专线/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("♻️ 自动选择", 'url-test', names.slice(), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🛡️ 故障转移", 'fallback', names.slice(), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3});
+  grp("🇭🇰 香港优选", 'url-test', pick(/🇭🇰/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇯🇵 日本优选", 'url-test', pick(/🇯🇵/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇯🇵 日本稳定", "fallback", ["🇯🇵日本专线03|BGP|流媒体", "🇯🇵日本专线04|BGP|流媒体", "🇯🇵日本专线02|BGP|流媒体", "🇯🇵日本专线01|BGP|流媒体", "🇯🇵日本高速03|BGP|CUCM", "🇯🇵日本高速02|BGP|CUCM"], {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 5000, "expected-status": 204, "max-failed-times": 2});
+  grp("🇸🇬 新加坡优选", 'url-test', pick(/🇸🇬/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇺🇸 美国优选", 'url-test', pick(/🇺🇸/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇬🇧 英国优选", 'url-test', pick(/🇬🇧/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇯🇵 日本专线", 'url-test', pick(/🇯🇵.*专线/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇸🇬 新加坡专线", 'url-test', pick(/🇸🇬.*专线/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇺🇸 美国流媒体", 'url-test', pick(/🇺🇸.*流媒体/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇨🇳 台湾专线", 'url-test', pick(/台湾.*专线/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
   grp("🚀 节点选择", "select", ["♻️ 自动选择", "🛡️ 故障转移", "🇭🇰 香港优选", "🇯🇵 日本优选", "🇸🇬 新加坡优选", "🇺🇸 美国优选", "🇬🇧 英国优选", "🇺🇸 美国流媒体", "🇨🇳 台湾专线", "🇯🇵 日本专线", "🇸🇬 新加坡专线", "DIRECT"]);
   grp("🎯 Google", "select", ["🇯🇵 日本专线", "🇯🇵 日本优选", "🇯🇵 日本稳定"], {"include-all-proxies": true});
   grp("✈️ Telegram", "select", ["🇯🇵 日本优选", "🇯🇵 日本专线", "🇯🇵 日本稳定", "DIRECT"], {"include-all-proxies": true});
-  grp("🤖 AI", "select", ["🇺🇸 美国优选", "🇯🇵 日本专线", "🇯🇵 日本优选", "🇺🇸 美国流媒体"], {"include-all-proxies": true});
+  grp("🤖 AI", "fallback", ["🇯🇵日本专线03|BGP|流媒体", "🇯🇵日本专线04|BGP|流媒体", "🇯🇵日本专线02|BGP|流媒体", "🇯🇵日本专线01|BGP|流媒体", "🇯🇵日本高速03|BGP|CUCM", "🇯🇵日本高速02|BGP|CUCM", "🇸🇬 新加坡优选"], {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 5000, "expected-status": 204, "max-failed-times": 2});
   grp("🐙 开发", "select", ["🇭🇰 香港优选", "🇯🇵 日本专线", "🇸🇬 新加坡专线", "🇸🇬 新加坡优选", "🇯🇵 日本优选"]);
   grp("🐦 X/Twitter", "select", ["🇯🇵 日本优选", "🇯🇵 日本专线", "🇺🇸 美国优选", "🇸🇬 新加坡优选", "🇭🇰 香港优选"]);
   grp("📺 流媒体", "select", ["🇺🇸 美国流媒体", "🇨🇳 台湾专线", "🇭🇰 香港优选", "🇯🇵 日本专线", "🇸🇬 新加坡专线", "🇯🇵 日本优选", "DIRECT"]);
   grp("🌐 未匹配", "select", ["🚀 节点选择", "DIRECT", "♻️ 自动选择", "🛡️ 故障转移", "🇭🇰 香港优选", "🇯🇵 日本优选", "🇸🇬 新加坡优选", "🇺🇸 美国优选", "🇬🇧 英国优选"]);
   grp("🧪 节点测速", "select", ["DIRECT"], {"include-all-proxies": true});
-  grp("🇭🇰 香港专线", 'url-test', pick(/🇭🇰.*专线/), {"url": "http://cp.cloudflare.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
+  grp("🇭🇰 香港专线", 'url-test', pick(/🇭🇰.*专线/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
 
   config['proxy-groups'] = groups;
 
