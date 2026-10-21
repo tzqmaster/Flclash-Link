@@ -1,7 +1,7 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
 //  生成日期: 2026-10-21
-//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 848 条规则 -> Apple 直连
+//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 855 条规则 -> Apple 直连
 //
 //  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
 //                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
@@ -83,7 +83,7 @@ function main(config) {
   return config;
 }
 
-// ---------- 规则表（848 条）----------
+// ---------- 规则表（855 条）----------
 var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
@@ -263,6 +263,13 @@ var RULES = [
   "DOMAIN-SUFFIX,getui.com,DIRECT",
   "DOMAIN-SUFFIX,jpush.cn,DIRECT",
   "DOMAIN-SUFFIX,jiguang.cn,DIRECT",
+  "DOMAIN-SUFFIX,tuhu.cn,DIRECT",
+  "DOMAIN-SUFFIX,tuhu.com,DIRECT",
+  "DOMAIN-SUFFIX,tuhucdn.com,DIRECT",
+  "DOMAIN-SUFFIX,tuhucloud.com,DIRECT",
+  "DOMAIN-SUFFIX,tuhuim.com,DIRECT",
+  "DOMAIN-SUFFIX,tuhutmp.com,DIRECT",
+  "DOMAIN-SUFFIX,tuhuiteche.com,DIRECT",
   "DOMAIN,copilot.microsoft.com,🤖 AI",
   "DOMAIN-SUFFIX,microsoft.com,DIRECT",
   "DOMAIN-SUFFIX,microsoft365.com,DIRECT",
