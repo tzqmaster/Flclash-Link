@@ -1,7 +1,7 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
 //  生成日期: 2026-10-21
-//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 855 条规则 -> Apple 直连
+//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 856 条规则 -> Apple 直连
 //
 //  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
 //                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
@@ -60,7 +60,7 @@ function main(config) {
   grp("🐙 开发", "select", ["🇭🇰 香港优选", "🇯🇵 日本专线", "🇸🇬 新加坡专线", "🇸🇬 新加坡优选", "🇯🇵 日本优选"]);
   grp("🐦 X/Twitter", "select", ["🇯🇵 日本优选", "🇯🇵 日本专线", "🇺🇸 美国优选", "🇸🇬 新加坡优选", "🇭🇰 香港优选"]);
   grp("📺 流媒体", "select", ["🇺🇸 美国流媒体", "🇨🇳 台湾专线", "🇭🇰 香港优选", "🇯🇵 日本专线", "🇸🇬 新加坡专线", "🇯🇵 日本优选", "DIRECT"]);
-  grp("🌐 未匹配", "select", ["🚀 节点选择", "DIRECT", "♻️ 自动选择", "🛡️ 故障转移", "🇭🇰 香港优选", "🇯🇵 日本优选", "🇸🇬 新加坡优选", "🇺🇸 美国优选", "🇬🇧 英国优选"]);
+  grp("🌐 未匹配", "select", ["DIRECT", "🚀 节点选择", "♻️ 自动选择", "🛡️ 故障转移", "🇭🇰 香港优选", "🇯🇵 日本优选", "🇸🇬 新加坡优选", "🇺🇸 美国优选", "🇬🇧 英国优选"]);
   grp("🧪 节点测速", "select", ["DIRECT"], {"include-all-proxies": true});
   grp("🇭🇰 香港专线", 'url-test', pick(/🇭🇰.*专线/), {"url": "https://www.google.com/generate_204", "interval": 300, "lazy": false, "timeout": 8000, "expected-status": 204, "max-failed-times": 3, "tolerance": 50});
 
@@ -83,7 +83,7 @@ function main(config) {
   return config;
 }
 
-// ---------- 规则表（855 条）----------
+// ---------- 规则表（856 条）----------
 var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
@@ -311,6 +311,7 @@ var RULES = [
   "DOMAIN-SUFFIX,nvidia.com,DIRECT",
   "DOMAIN-SUFFIX,speedtest.net,DIRECT",
   "DOMAIN-SUFFIX,files.pythonhosted.org,DIRECT",
+  "GEOSITE,geolocation-!cn,🚀 节点选择",
   "GEOSITE,category-ai-chat-!cn,🤖 AI",
   "GEOSITE,category-dev,🐙 开发",
   "GEOSITE,category-games,🚀 节点选择",

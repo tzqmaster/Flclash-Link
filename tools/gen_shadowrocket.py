@@ -218,6 +218,11 @@ def main():
             if not doms:
                 stat['skip'] += 1
                 continue
+            if name in ('geolocation-!cn',):
+                # 白名单总表 27k 条，iOS 全量展开会让 conf 超 1MB 且拖慢匹配；
+                # 小火箭由 FINAL,DIRECT 兜底，热门国外站已由 8.5 的单站分类展开覆盖。
+                stat['skip'] += 1
+                continue
             cap = 35
             cnt = 0
             for t, d in doms:
@@ -300,7 +305,10 @@ proxy-test-url = http://www.gstatic.com/generate_204
     tail = []
     if cn_geo[0]:
         tail.append('GEOIP,CN,DIRECT')
-    tail.append('FINAL,PROXY')
+    # 白名单模式（2026-10-21）：FINAL 改 DIRECT。
+    # 国外站已由上面展开的显式域名规则覆盖；国内 APP 的漏网辅助域直接命中 FINAL 直连，
+    # 不再因代理节点不稳而「无法接入网络」。冷门国外站打不开时往 CLASH 段加域名后重新生成。
+    tail.append('FINAL,DIRECT')
     final = private_part + cn_lines + rest + tail
 
     import datetime
