@@ -281,9 +281,13 @@ def main():
 
 [General]
 bypass-system = true
-skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local, captive.apple.com
+; ↓ 银行/运营商/打车 APP 加进 skip-proxy（Repcz 实践：防银行 APP 检测到代理环境而拒绝服务）
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local, captive.apple.com, seed-sequoia.siri.apple.com, sequoia.siri.apple.com, sequoia.apple.com, passenger.t3go.cn, yunbusiness.ccb.com, wxh.wo.cn, gate.lagou.com, www.abchina.com.cn, login-service.mobile-bank.psbc.com, mobile-bank.psbc.com
 tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 255.255.255.255/32
 dns-server = 223.5.5.5, 119.29.29.29
+; ↓ 网络连通性探测/游戏主机/Netflix STUN 必须拿真实 IP，fake-ip 会把它们搞挂（Repcz 实践）
+always-real-ip = *.msftconnecttest.com, *.msftncsi.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, stun.l.google.com, *.prod.cloud.netflix.com, appboot.netflix.com, *-appboot.netflix.com, lancache.steamcontent.com, *.n.n.srv.nintendo.net
+hijack-dns = *:53
 private-ip-answer = true
 icmp-auto-reply = true
 internet-test-url = http://www.gstatic.com/generate_204
@@ -316,10 +320,17 @@ proxy-test-url = http://www.gstatic.com/generate_204
     header = header.replace('__N__', str(len(final)))
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    host_section = """
+[Host]
+; 苹果域走系统 DNS 解析（LOWERTOP 实践：防 fake-ip 干扰 App Store 下载与推送）
+*.apple.com = server:system
+*.icloud.com = server:system
+"""
     with open(OUT, 'w', encoding='utf-8') as f:
         f.write(header)
         f.write('\n'.join(final))
         f.write('\n')
+        f.write(host_section)
 
     print('输出:', OUT)
     print('规则条数:', len(final), '（私网 %d + 国内直连 %d + 其余 %d）'
