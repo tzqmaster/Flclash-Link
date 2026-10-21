@@ -47,7 +47,7 @@ https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/main.js
 小火箭不认 `main.js`，也不支持 `GEOSITE`，所以单独提供一份转好的规则配置：
 
 ```
-https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/shadowrocket/Shadowrocket.conf
+	https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/shadowrocket/Shadowrocket.conf
 ```
 
 导入步骤：**首页右上「+」→ Subscribe → 填机场订阅链接**（先拿到节点）→ **底部「配置」→ 右上「+」→ URL → 粘贴上面这行** → 下载后点一下启用。
@@ -72,11 +72,11 @@ python3 tools/gen_override_js.py <已调优的 yaml> main.js
 
 ## 实测：规则多了会不会卡
 
-| 规则数 | 启动就绪 | 常驻内存 | 请求耗时中位（n=15） |
-|---|---|---|---|
-| 140 | 0.22 s | 157 MB | 58.6 ms |
-| 771 | 0.47 s | 155 MB | 58.9 ms |
-| 10,140 | 0.31 s | 145 MB | — |
+| 规则数    | 启动就绪   | 常驻内存   | 请求耗时中位（n=15） |
+| ------ | ------ | ------ | ------------ |
+| 140    | 0.22 s | 157 MB | 58.6 ms      |
+| 771    | 0.47 s | 155 MB | 58.9 ms      |
+| 10,140 | 0.31 s | 145 MB | —            |
 
 `DOMAIN-SUFFIX` / `GEOSITE` / `IP-CIDR` 都走字典树，匹配成本只跟域名长度有关，跟规则条数无关。真正会卡的三种写法（`GEOIP` 不写 `no-resolve`、大量 `DOMAIN-KEYWORD`、`RULE-SET` 远程订阅）本仓库一条都没用。
 

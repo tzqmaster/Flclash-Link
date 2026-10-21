@@ -1,7 +1,7 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
-//  生成日期: 2026-10-20
-//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 833 条规则 -> Apple 直连
+//  生成日期: 2026-10-21
+//  作用: 剔除伪节点 -> 重建 22 个策略组 -> 覆盖 848 条规则 -> Apple 直连
 //
 //  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
 //                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
@@ -83,7 +83,7 @@ function main(config) {
   return config;
 }
 
-// ---------- 规则表（833 条）----------
+// ---------- 规则表（848 条）----------
 var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
@@ -220,6 +220,7 @@ var RULES = [
   "DOMAIN-SUFFIX,ttvnw.net,📺 流媒体",
   "DOMAIN-SUFFIX,jtvnw.net,📺 流媒体",
   "GEOSITE,cn,DIRECT",
+  "GEOSITE,geolocation-cn,DIRECT",
   "DOMAIN-SUFFIX,cn,DIRECT",
   "GEOIP,cn,DIRECT,no-resolve",
   "DOMAIN-SUFFIX,douyin.com,DIRECT",
@@ -248,6 +249,20 @@ var RULES = [
   "DOMAIN-SUFFIX,feishu.cn,DIRECT",
   "DOMAIN-SUFFIX,feishucdn.com,DIRECT",
   "DOMAIN-SUFFIX,larkoffice.com,DIRECT",
+  "DOMAIN-SUFFIX,smzdm.com,DIRECT",
+  "DOMAIN-SUFFIX,zdmimg.com,DIRECT",
+  "DOMAIN-SUFFIX,smzdmpic.com,DIRECT",
+  "DOMAIN-SUFFIX,smzdm.im,DIRECT",
+  "DOMAIN-SUFFIX,shenimg.com,DIRECT",
+  "DOMAIN-SUFFIX,zdm.net,DIRECT",
+  "DOMAIN-SUFFIX,cnzz.com,DIRECT",
+  "DOMAIN-SUFFIX,umtrack.com,DIRECT",
+  "DOMAIN-SUFFIX,uc.cn,DIRECT",
+  "DOMAIN-SUFFIX,tanx.com,DIRECT",
+  "DOMAIN-SUFFIX,tbcdn.cn,DIRECT",
+  "DOMAIN-SUFFIX,getui.com,DIRECT",
+  "DOMAIN-SUFFIX,jpush.cn,DIRECT",
+  "DOMAIN-SUFFIX,jiguang.cn,DIRECT",
   "DOMAIN,copilot.microsoft.com,🤖 AI",
   "DOMAIN-SUFFIX,microsoft.com,DIRECT",
   "DOMAIN-SUFFIX,microsoft365.com,DIRECT",
