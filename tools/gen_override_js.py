@@ -37,22 +37,55 @@ REGION = {
 ALL_GROUP = '♻️ 自动选择'
 FB_GROUP = '🛡️ 故障转移'
 
+# 线路分组：每个地区一个「可手选」的组，组内第一项是该区的自动优选组，
+# 后面才是这条线路上所有具体节点 —— 用来在「那个场景走哪条线」时逐条挑。
+LINE_GROUPS = [
+    ('🇭🇰 香港线路', r'🇭🇰', '🇭🇰 香港优选'),
+    ('🇯🇵 日本线路', r'🇯🇵', '🇯🇵 日本优选'),
+    ('🇸🇬 新加坡线路', r'🇸🇬', '🇸🇬 新加坡优选'),
+    ('🇺🇸 美国线路', r'🇺🇸', '🇺🇸 美国优选'),
+    ('🇬🇧 英国线路', r'🇬🇧', '🇬🇧 英国优选'),
+    ('🇨🇳 台湾线路', r'台湾', '🇨🇳 台湾专线'),
+]
+LINE_NAMES = [x[0] for x in LINE_GROUPS]
+# 场景组的默认线路（放成员第一位 = 首次使用默认选中）
+SCENARIO_DEFAULT = {
+    '🐙 开发': '🇭🇰 香港优选',
+    '🎯 Google': '🇭🇰 香港优选',
+    '🐦 X/Twitter': '🇭🇰 香港优选',
+    '🌐 未匹配': 'DIRECT',
+}
+NO_INJECT = {'🧪 节点测速'}
+
 
 def js(v):
     return json.dumps(v, ensure_ascii=False)
 
 
-lines = []
+lines_head = []
+lines_region = []
+lines_line = []
+lines_scene = []
 for g in groups:
     name = g['name']
     if name in REGION:
         typ, pat, opts = REGION[name]
-        lines.append("  grp(%s, '%s', pick(/%s/), %s);" % (js(name), typ, pat, js(opts)))
+        lines_region.append("  grp(%s, '%s', pick(/%s/), %s);" % (js(name), typ, pat, js(opts)))
     elif name == ALL_GROUP:
-        lines.append("  grp(%s, 'url-test', names.slice(), %s);" % (js(name), js(URLTEST)))
+        lines_head.append("  grp(%s, 'url-test', names.slice(), %s);" % (js(name), js(URLTEST)))
     elif name == FB_GROUP:
-        lines.append("  grp(%s, 'fallback', names.slice(), %s);" % (js(name), js(TEST)))
+        lines_head.append("  grp(%s, 'fallback', names.slice(), %s);" % (js(name), js(TEST)))
     else:
+        members = list(g.get('proxies', []))
+        if name not in NO_INJECT:
+            dft = SCENARIO_DEFAULT.get(name)
+            if dft:
+                if dft in members:
+                    members.remove(dft)
+                members.insert(0, dft)
+            for ln in LINE_NAMES:
+                if ln not in members:
+                    members.append(ln)
         extra = {}
         if g.get('include-all-proxies'):
             extra["include-all-proxies"] = True
@@ -60,10 +93,16 @@ for g in groups:
                   'max-failed-times', 'tolerance'):
             if k in g:
                 extra[k] = g[k]
-        lines.append("  grp(%s, %s, %s%s);" % (
-            js(name), js(g['type']), js(g.get('proxies', [])),
+        lines_scene.append("  grp(%s, %s, %s%s);" % (
+            js(name), js(g['type']), js(members),
             (", " + js(extra)) if extra else ""))
-GROUPS_JS = "\n".join(lines)
+
+for gname, pat, auto in LINE_GROUPS:
+    lines_line.append(
+        "  grp(%s, 'select', [%s].concat(pick(/%s/)));" % (js(gname), js(auto), pat))
+
+GROUPS_JS = "\n".join(lines_head + lines_region + lines_line + lines_scene)
+TOTAL_GROUPS = len(groups) + len(LINE_GROUPS)
 RULES_JS = "\n".join("  " + js(r) + "," for r in rules)
 TODAY = datetime.date.today().isoformat()
 
@@ -138,10 +177,10 @@ var RULES = [
 """
 
 out = (TEMPLATE.replace('@TODAY@', TODAY)
-              .replace('@NG@', str(len(groups)))
+              .replace('@NG@', str(TOTAL_GROUPS))
               .replace('@NR@', str(len(rules)))
               .replace('@GROUPS@', GROUPS_JS)
               .replace('@RULES@', RULES_JS))
 
 open(OUT, 'w', encoding='utf-8').write(out)
-print('已生成 %s: %.1f KB | 组 %d | 规则 %d' % (OUT, len(out) / 1024, len(groups), len(rules)))
+print('已生成 %s: %.1f KB | 组 %d | 规则 %d' % (OUT, len(out) / 1024, TOTAL_GROUPS, len(rules)))
