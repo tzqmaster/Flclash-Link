@@ -26,6 +26,5 @@ profiles/
 __pycache__/
 *.pyc
 
-# iOS 精简配置含节点凭据，永不提交
-ios/*.yaml
-Clash-iOS*.yaml
+# iOS 版配置是要发布的（ios/Clash-iOS.yaml），这里只挡临时产物
+ios/*.tmp.yaml

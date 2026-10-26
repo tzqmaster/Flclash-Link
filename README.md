@@ -2,6 +2,19 @@
 
 FlClash / mihomo 的**覆写脚本仓库**。只放规则和策略组，**不放任何节点、UUID、订阅地址**——节点走你自己的机场订阅。
 
+## 两条订阅链接（按设备选）
+
+| 设备 | 用什么 | 链接 |
+| --- | --- | --- |
+| **电脑 / 安卓（FlClash）** | 覆写脚本 `main.js` | `https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/main.js` |
+| **iPhone（ClashMi / Karing / Stash）** | 完整配置 `ios/Clash-iOS.yaml` | `https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/ios/Clash-iOS.yaml` |
+| iPhone 备用（raw 打不开时） | 同上，走 jsDelivr 镜像 | `https://cdn.jsdelivr.net/gh/tzqmaster/Flclash-Link@main/ios/Clash-iOS.yaml` |
+| **iPhone（小火箭 Shadowrocket）** | 规则配置 `.conf` | `https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/shadowrocket/Shadowrocket.conf` |
+
+⚠️ **两条链接不是一回事，不能互换**：`main.js` 是 JS 覆写脚本，只有 FlClash 认（FlClash 无 iOS 版）；`ios/Clash-iOS.yaml` 是完整的 mihomo 配置（53 节点 / 28 组 / 861 规则），任何 Clash 系客户端都能直接当配置导入。
+
+⚠️ **`ios/Clash-iOS.yaml` 内含节点凭据**（服务器地址 + 密码）。仓库是公开的，等于把节点公开；介意就去机场后台重置订阅，然后重新导出覆盖本文件。
+
 ## 这个仓库解决什么
 
 机场订阅自带的规则通常只有 100 多条，`reddit`、`wikipedia`、`discord`、`steam`、`facebook`、`linkedin`、`bbc` 这类常见站点经常没有规则，直接掉进「兜底直连」，国内直连必然打不开。
