@@ -10,7 +10,7 @@ FlClash / mihomo 的**覆写脚本仓库**。只放规则和策略组，**不放
 
 1. 剔除伪节点（`剩余流量：xxx`、`套餐到期：xxx`，这类节点测速能过、会被误选）
 2. 重建 **28 个策略组**（6 个地区线路组 + 10 个区域优选 / 专线组 + AI / Google / Telegram / 开发 / 流媒体 / 未匹配 等场景组）
-3. 覆盖 **855 条规则**（Apple 直连 + 7 个 geosite 大类 + 62 个单站 + 600+ 条域名后缀）
+3. 覆盖 **856 条规则**（Apple 直连 + 7 个 geosite 大类 + 62 个单站 + 600+ 条域名后缀）
 4. 兜底改为**走代理**，国内域名由 `GEOSITE,cn` / `.cn` / `GEOIP,cn` 三层拦回直连
 
 ## 策略组怎么选（两层：场景 → 线路 → 节点）
@@ -72,7 +72,7 @@ https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/shadowrocket/Shado
 
 差异说明：
 
-- Clash 的 855 条规则在这里转成 2320 条小火箭规则。`GEOSITE` 用 `GEOSITE.dat` 反解析成真实域名，规则库里国内域名已剔除，不会把 B 站 / 爱奇艺送进代理。
+- Clash 的 856 条规则在这里转成 2320 条小火箭规则。`GEOSITE` 用 `GEOSITE.dat` 反解析成真实域名，规则库里国内域名已剔除，不会把 B 站 / 爱奇艺送进代理。
 - 小火箭没有多策略组引用，`🚀节点选择 / 📺流媒体 / 🤖AI / 🐙开发 / 🎯Google` 全部折叠成 `PROXY`（即首页当前选中的节点），另保留 `DIRECT` / `REJECT`。
 - 兜底顺序：私网 → 国内大站直连 → 国外显式规则 → `GEOIP,CN,DIRECT` → `FINAL,PROXY`。
 - 文件头带 `#!MANAGED-CONFIG ... interval=86400`，小火箭会每天自动拉一次，仓库更新后设备自动生效。

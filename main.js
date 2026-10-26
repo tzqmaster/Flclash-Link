@@ -1,7 +1,7 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
 //  生成日期: 2026-10-26
-//  作用: 剔除伪节点 -> 重建 28 个策略组 -> 覆盖 855 条规则 -> Apple 直连
+//  作用: 剔除伪节点 -> 重建 28 个策略组 -> 覆盖 856 条规则 -> Apple 直连
 //
 //  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
 //                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
@@ -89,7 +89,7 @@ function main(config) {
   return config;
 }
 
-// ---------- 规则表（855 条）----------
+// ---------- 规则表（856 条）----------
 var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
@@ -317,6 +317,7 @@ var RULES = [
   "DOMAIN-SUFFIX,nvidia.com,DIRECT",
   "DOMAIN-SUFFIX,speedtest.net,DIRECT",
   "DOMAIN-SUFFIX,files.pythonhosted.org,DIRECT",
+  "GEOSITE,geolocation-!cn,🚀 节点选择",
   "GEOSITE,category-ai-chat-!cn,🤖 AI",
   "GEOSITE,category-dev,🐙 开发",
   "GEOSITE,category-games,🚀 节点选择",
