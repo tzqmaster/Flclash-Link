@@ -2,18 +2,24 @@
 
 FlClash / mihomo 的**覆写脚本仓库**。只放规则和策略组，**不放任何节点、UUID、订阅地址**——节点走你自己的机场订阅。
 
-## 两条订阅链接（按设备选）
+## 链接一览（按设备选）
 
 | 设备 | 用什么 | 链接 |
 | --- | --- | --- |
 | **电脑 / 安卓（FlClash）** | 覆写脚本 `main.js` | `https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/main.js` |
-| **iPhone（ClashMi / Karing / Stash）** | 完整配置 `ios/Clash-iOS.yaml` | `https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/ios/Clash-iOS.yaml` |
-| iPhone 备用（raw 打不开时） | 同上，走 jsDelivr 镜像 | `https://cdn.jsdelivr.net/gh/tzqmaster/Flclash-Link@main/ios/Clash-iOS.yaml` |
 | **iPhone（小火箭 Shadowrocket）** | 规则配置 `.conf` | `https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/shadowrocket/Shadowrocket.conf` |
+| **iPhone（ClashMi / Karing / Stash）** | 完整 yaml，**本仓库不托管** | 本地跑 `tools/make_ios_yaml.py` 生成后 AirDrop 到手机 |
 
-⚠️ **两条链接不是一回事，不能互换**：`main.js` 是 JS 覆写脚本，只有 FlClash 认（FlClash 无 iOS 版）；`ios/Clash-iOS.yaml` 是完整的 mihomo 配置（53 节点 / 28 组 / 861 规则），任何 Clash 系客户端都能直接当配置导入。
+raw 被墙时换 jsDelivr 镜像：把 `https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/` 换成 `https://cdn.jsdelivr.net/gh/tzqmaster/Flclash-Link@main/`。
 
-⚠️ **`ios/Clash-iOS.yaml` 内含节点凭据**（服务器地址 + 密码）。仓库是公开的，等于把节点公开；介意就去机场后台重置订阅，然后重新导出覆盖本文件。
+⚠️ **两条链接不能互换**：`main.js` 是 JS 覆写脚本，只有 FlClash 认（FlClash 无 iOS 版，官方只发 Win/macOS/Linux/Android），iOS 客户端把它当订阅填进去必然解析失败。
+
+⚠️ **iOS 的 Clash 系客户端（ClashMi / Karing / Stash）只吃「含节点的完整 yaml」**，而本仓库是公开的、且带 pre-commit 凭据拦截（`server:` / `uuid:` / 订阅地址一律拒绝入库）。所以 iOS 版走「本地生成 + 文件导入」，不托管在仓库里——避免把 53 个节点凭据公开。
+
+```bash
+# 在 Mac 上生成 iOS 版（会从当前 FlClash 配置里带出节点）
+python3 tools/make_ios_yaml.py ~/Library/Application\ Support/com.follow.clash/config.yaml Clash-iOS.yaml
+```
 
 ## 这个仓库解决什么
 
