@@ -39,6 +39,7 @@ rules/规则库覆盖清单.csv      771 条规则覆盖了哪些站，逐条可
 docs/配置改动说明.md          完整的改动记录、实测数据、回滚方法
 docs/手机使用说明.md          手机端（安卓 / iPhone）配置方法
 tools/gen_override_js.py      从一份已调优的 yaml 反向生成 main.js
+tools/make_ios_yaml.py         从同一份 yaml 生成 iOS 客户端可导入的精简 yaml（含节点，勿公开）
 tools/gen_shadowrocket.py     从同一份 yaml 生成小火箭 .conf（含 GEOSITE 展开）
 tools/expand_rules.py         规则库扩容脚本（幂等，可反复执行）
 ```
@@ -58,6 +59,28 @@ https://raw.githubusercontent.com/tzqmaster/Flclash-Link/main/main.js
 填到脚本的 URL 栏。以后本仓库更新，设备重新拉订阅时自动用新版，不用再动。
 
 **节点怎么来**：FlClash → 配置 → `+` → 从 URL 导入 → 填你自己的机场订阅链接。节点由机场维护，UUID 轮换也不影响。
+
+## ⚠️ iOS 不能用 main.js（重要）
+
+`main.js` 是 **FlClash 的覆写脚本（JavaScript）**，raw 链接返回的是 `text/plain` 的 JS 源码。
+FlClash 官方**没有 iOS 版**（只发 Windows / macOS / Linux / Android），所以 iPhone 上任何客户端
+（ClashMi / Karing / Stash / ClashX）把它填进「订阅 / 配置 URL」都会解析失败——客户端要的是 YAML，拿到的是 JS。
+
+iPhone 三条可行路线：
+
+| 路线 | 客户端 | 用什么 | 说明 |
+| --- | --- | --- | --- |
+| A | 小火箭 Shadowrocket | 本仓库 `shadowrocket/Shadowrocket.conf` | 规则已转好，见下一节 |
+| B | ClashMi / Karing / Stash | **一份 yaml**（本仓库不放，因为含节点凭据） | 用 `tools/make_ios_yaml.py` 从已调优的 yaml 生成后 AirDrop 到手机 |
+| C | 任意 iOS 客户端 | 直接导入机场订阅 | 节点自动更新，但规则退回机场默认（100~500 条，很多站没有规则） |
+
+生成 iOS 版 yaml：
+
+```bash
+python3 tools/make_ios_yaml.py ~/Library/Application\ Support/com.follow.clash/config.yaml Clash-iOS.yaml
+# 先用真实内核校验（可选）
+mihomo -t -f Clash-iOS.yaml -d /tmp/mihomo_check
+```
 
 ## iOS 小火箭（Shadowrocket）
 

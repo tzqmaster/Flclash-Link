@@ -25,3 +25,7 @@ profiles/
 .DS_Store
 __pycache__/
 *.pyc
+
+# iOS 精简配置含节点凭据，永不提交
+ios/*.yaml
+Clash-iOS*.yaml
