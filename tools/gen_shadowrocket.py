@@ -12,7 +12,8 @@ import re
 import os
 import sys
 
-PROFILE = os.path.expanduser('~/Library/Application Support/com.follow.clash/profiles/368389100727701504.yaml')
+PROFILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                       'flclash-backup-20261021-221518-whitelist', 'profile.yaml')
 GEOSITE = '/tmp/mihomo_test/GEOSITE.dat'
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'shadowrocket', 'Shadowrocket.conf')
 
@@ -129,6 +130,11 @@ def main():
             m = re.search(r"- '(.*?)'", L)
             if m:
                 clash_rules.append(m.group(1).strip())
+            else:
+                # 兼容无引号写法： - DOMAIN-SUFFIX,xxx,DIRECT
+                m2 = re.match(r'^\s*-\s+(.+?)\s*$', L)
+                if m2:
+                    clash_rules.append(m2.group(1).strip())
 
     sites = load_geosite(GEOSITE)
     # 国内域名全集：展开国外分类时剔掉，防止 category-media 之类把 B 站/爱奇艺送去代理
@@ -205,6 +211,10 @@ def main():
                 for t, d in merged:
                     if d.startswith('.'):
                         d = d.lstrip('.')
+                    # siri 子域交给前置的 DOMAIN-KEYWORD,siri,PROXY 统一处理
+                    if 'siri' in d:
+                        stat['skip'] += 1
+                        continue
                     if t == 3:
                         line = 'DOMAIN,%s,%s' % (d, tgt)
                     else:
@@ -233,6 +243,11 @@ def main():
                 if d in cn_set:
                     stat['cn_filtered'] += 1
                     continue
+                # siri 子域统一由前置的 DOMAIN-KEYWORD,siri,PROXY 接管，
+                # 这里不再生成 DIRECT，避免两条规则互相打架
+                if 'siri' in d:
+                    stat['skip'] += 1
+                    continue
                 if t == 3:
                     line = 'DOMAIN,%s,%s' % (d, tgt)
                 else:
@@ -243,7 +258,7 @@ def main():
             continue
 
         # --- 普通规则 ---
-        if typ in ('DOMAIN', 'DOMAIN-SUFFIX', 'IP-CIDR', 'IP-CIDR6', 'GEOIP'):
+        if typ in ('DOMAIN', 'DOMAIN-SUFFIX', 'DOMAIN-KEYWORD', 'IP-CIDR', 'IP-CIDR6', 'GEOIP'):
             name = parts[1]
             pol = parts[2] if len(parts) > 2 else 'DIRECT'
             extra = parts[3] if len(parts) > 3 else None
@@ -282,7 +297,7 @@ def main():
 [General]
 bypass-system = true
 ; ↓ 银行/运营商/打车 APP 加进 skip-proxy（Repcz 实践：防银行 APP 检测到代理环境而拒绝服务）
-skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local, captive.apple.com, seed-sequoia.siri.apple.com, sequoia.siri.apple.com, sequoia.apple.com, passenger.t3go.cn, yunbusiness.ccb.com, wxh.wo.cn, gate.lagou.com, www.abchina.com.cn, login-service.mobile-bank.psbc.com, mobile-bank.psbc.com
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local, captive.apple.com, passenger.t3go.cn, yunbusiness.ccb.com, wxh.wo.cn, gate.lagou.com, www.abchina.com.cn, login-service.mobile-bank.psbc.com, mobile-bank.psbc.com
 tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 255.255.255.255/32
 dns-server = 223.5.5.5, 119.29.29.29
 ; ↓ 网络连通性探测/游戏主机/Netflix STUN 必须拿真实 IP，fake-ip 会把它们搞挂（Repcz 实践）

@@ -1,7 +1,7 @@
 // =====================================================================
 //  FlClash / mihomo 覆写脚本（由已调优配置自动生成）
-//  生成日期: 2026-10-26
-//  作用: 剔除伪节点 -> 重建 28 个策略组 -> 覆盖 861 条规则 -> Apple 直连
+//  生成日期: 2026-11-10
+//  作用: 剔除伪节点 -> 重建 28 个策略组 -> 覆盖 875 条规则 -> Apple 直连
 //
 //  用法一（最稳）: FlClash -> 配置 -> 选中订阅 -> 右上角「脚本」
 //                -> 粘贴本文件全文 -> 保存 -> 重新拉取订阅
@@ -89,7 +89,7 @@ function main(config) {
   return config;
 }
 
-// ---------- 规则表（861 条）----------
+// ---------- 规则表（875 条）----------
 var RULES = [
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
@@ -99,6 +99,20 @@ var RULES = [
   "DOMAIN,localhost,DIRECT",
   "DOMAIN-SUFFIX,msftconnecttest.com,DIRECT",
   "DOMAIN-SUFFIX,msftncsi.com,DIRECT",
+  "DOMAIN-SUFFIX,itunes.apple.com,🚀 节点选择",
+  "DOMAIN-SUFFIX,smp-device-content.apple.com,🚀 节点选择",
+  "DOMAIN-SUFFIX,xp.apple.com,🚀 节点选择",
+  "DOMAIN-SUFFIX,mesu.apple.com,🚀 节点选择",
+  "DOMAIN,guzzoni.apple.com,🚀 节点选择",
+  "DOMAIN-SUFFIX,smoot.apple.com,🚀 节点选择",
+  "DOMAIN,gateway.icloud.com,🚀 节点选择",
+  "DOMAIN,gs-loc-cn.apple.com,🚀 节点选择",
+  "DOMAIN,gspe1-ssl.ls.apple.com,🚀 节点选择",
+  "DOMAIN,p150-acsegateway.icloud.com,🚀 节点选择",
+  "DOMAIN,setup.icloud.com,🚀 节点选择",
+  "DOMAIN,bag.itunes.apple.com,🚀 节点选择",
+  "DOMAIN-KEYWORD,siri,🚀 节点选择",
+  "DOMAIN-SUFFIX,icloud-content.com,🚀 节点选择",
   "GEOSITE,apple,DIRECT",
   "GEOSITE,apple-cn,DIRECT",
   "GEOSITE,icloud,DIRECT",
